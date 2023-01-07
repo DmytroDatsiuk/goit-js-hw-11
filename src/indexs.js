@@ -1,5 +1,6 @@
 import NewsApiService from './new-service';
-// import Notiflix from 'notiflix';
+import Notiflix from 'notiflix';
+
 // const axios = require('axios').default;
 
 const refs = {
@@ -24,18 +25,21 @@ function onSearch(e) {
   newsApiService
     .fetchArticles()
     .then(data => {
-      console.log('data.hits', data.hits)
-      // console.log(data.totalHits)
-      // Notiflix.Notify.
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
       return appendPhotoHitsMurkup(data.hits);
     })
-    .catch(error => {});
+    .catch(error => {
+      console.log(error);
+    });
 }
 
 function onLoadMore(e) {
-  console.log(data.hits)
-  newsApiService.fetchArticles().then(data => appendPhotoHitsMurkup(data.hits));
+  newsApiService
+    .fetchArticles()
+    .then(data => appendPhotoHitsMurkup(data.hits))
+    .catch(error => {
+      console.log(error);
+    });
 }
 // console.log('hi')
 
@@ -85,5 +89,3 @@ function createPhotoMarkup(searchQuery) {
 </div>`
   );
 }
-
-console.log('hi')
