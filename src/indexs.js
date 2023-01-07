@@ -1,5 +1,7 @@
 import NewsApiService from './new-service';
 import Notiflix from 'notiflix';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // const axios = require('axios').default;
 
@@ -45,6 +47,9 @@ function onLoadMore(e) {
 
 function appendPhotoHitsMurkup(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', createPhotoMarkup(hits));
+  let gallery = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+  });
 }
 
 function createPhotoMarkup(searchQuery) {
@@ -58,7 +63,9 @@ function createPhotoMarkup(searchQuery) {
       comments,
       downloads,
     }) => `<div class="photo-card">
+    <a class='gallery__link' href='${largeImageURL}'>
   <img src="${webformatURL}" alt="${tags}" loading="lazy" width='400px' />
+  </a>
   <div class="info">
     <div>
       <p class="info-item">
