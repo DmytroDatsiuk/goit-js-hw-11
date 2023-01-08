@@ -7,6 +7,11 @@
     <title>Homework 10</title>
     <link
       rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
       href="/node_modules/simplelightbox/dist/simple-lightbox.css"
     />
     <link rel="stylesheet" href="./css/styles.css" />
@@ -20,12 +25,20 @@
           autocomplete="off"
           placeholder="Search images..."
         />
-        <button type="submit">Search</button>
+        <button type="submit" class="btn-primary">Search</button>
       </form>
     </header>
-    <div class="gallery" name="gallery"></div>
-    <button data-action="load-more" type="btn btn-primary button" class="btn">
-      <span class="spinner-border spinner-border-sm spinner is-hidden" role="status" aria-hidden="true"></span>
+    <div class="gallery" name="gallery" id="gallery"></div>
+    <button
+      data-action="load-more"
+      type="button"
+      class="btn btn-primary button"
+    >
+      <span
+        class="spinner-border spinner-border-sm spinner is-hidden"
+        role="status"
+        aria-hidden="true"
+      ></span>
       <span class="label">Load more</span>
     </button>
 

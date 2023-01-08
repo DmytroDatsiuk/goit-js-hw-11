@@ -2,49 +2,75 @@ import NewsApiService from './new-service';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
-// const axios = require('axios').default;
+import LoadMoreBtn from './load-more-btn';
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
-  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
   gallery: document.querySelector('.gallery'),
 };
 
+const loadMoreBtn = new LoadMoreBtn({
+  selector: '[data-action="load-more"]',
+  hidden: true,
+});
 const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
+
+// onscroll = (event) => {
+//   console.log(event.target.body.scrollHeigh)
+// };
 
 function onSearch(e) {
   e.preventDefault();
-  refs.gallery.innerHTML = '';
-
-  refs.loadMoreBtn.classList.remove('visually-hidden');
+  clearGalleryMarkup();
 
   newsApiService.query = e.currentTarget.elements.searchQuery.value;
+
   newsApiService.resetPage();
+
+  loadMoreBtn.disable();
   newsApiService
     .fetchArticles()
     .then(data => {
+      if (data.totalHits === 0) {
+        Notiflix.Notify.failure(
+          `Sorry, there are no images matching your search query. Please try again.`
+        );
+        return;
+      }
+      loadMoreBtn.show();
+      loadMoreBtn.enable();
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-      return appendPhotoHitsMurkup(data.hits);
+      appendPhotoHitsMurkup(data.hits);
     })
     .catch(error => {
       console.log(error);
     });
-
 }
 
 function onLoadMore(e) {
+  loadMoreBtn.disable();
+
   newsApiService
     .fetchArticles()
-    .then(data => appendPhotoHitsMurkup(data.hits))
+    .then(data => {
+      loadMoreBtn.enable();
+      appendPhotoHitsMurkup(data.hits);
+
+      const { height: cardHeight } =
+        refs.gallery.firstElementChild.getBoundingClientRect();
+
+      window.scrollBy({
+        top: cardHeight * 2,
+        behavior: 'smooth',
+      });
+    })
     .catch(error => {
       console.log(error);
     });
 }
-// console.log('hi')
 
 function appendPhotoHitsMurkup(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', createPhotoMarkup(hits));
@@ -98,4 +124,6 @@ function createPhotoMarkup(searchQuery) {
   );
 }
 
-console.log()
+function clearGalleryMarkup() {
+  refs.gallery.innerHTML = '';
+}
