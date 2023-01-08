@@ -1,25 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class NewsApiService {
-  
   constructor() {
     this.url = 'https://pixabay.com/api/';
-    // this.params = {
-    //   params: {
-    //     key: '32602095-27dbade4d0732e174c3b141f5',
-    //     q: this.searchQuery,
-    //     image_type: 'photo',
-    //     orientation: 'horizontal',
-    //     safesearch: true,
-    //     per_page: 40,
-    //     page: this.page,
-    //   },
-    // };
     this.searchQuery = '';
     this.page = 1;
   }
 
-  fetchArticles() {
+  async fetchArticles() {
     // console.log(this);
     // const url = `https://pixabay.com/api/?key=32602095-27dbade4d0732e174c3b141f5&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`;
 
@@ -28,7 +16,7 @@ export default class NewsApiService {
     //   .then(data => {
     //     // console.log(data);
     //     this.incrementPage();
-    //     return data; 
+    //     return data;
     //   });
 
     const params = {
@@ -40,11 +28,26 @@ export default class NewsApiService {
       per_page: 40,
       page: this.page,
     };
-    return axios.get(this.url, { params }).then(respons => {
+
+    const response = await axios.get(this.url, { params }).then(response => {
       this.incrementPage();
-      return respons.data;
+      return response.data;
     });
-    
+
+    return response;
+
+    // const response = await axios.get(url, {params})
+    // const incrementPage = await response.this.incrementPage();
+    // const respons = await response.data
+    // return respons
+
+    //* const fetchUsers = async () => {
+    //*   const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    //*   const users = await response.json();
+    //*   return users;
+    //* };
+
+    //* fetchUsers().then(users => console.log(users));
 
     // const url = 'https://pixabay.com/api/';
 

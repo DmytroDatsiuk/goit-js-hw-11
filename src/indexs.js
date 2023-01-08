@@ -33,6 +33,7 @@ function onSearch(e) {
     .catch(error => {
       console.log(error);
     });
+
 }
 
 function onLoadMore(e) {
@@ -96,3 +97,5 @@ function createPhotoMarkup(searchQuery) {
 </div>`
   );
 }
+
+console.log()
