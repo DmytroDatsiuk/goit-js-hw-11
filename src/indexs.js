@@ -68,7 +68,10 @@ function onLoadMore(e) {
       });
     })
     .catch(error => {
+      // loadMoreBtn.disable()
+      loadMoreBtn.hide()
       console.log(error);
+
     });
 }
 
