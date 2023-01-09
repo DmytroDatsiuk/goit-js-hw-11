@@ -79,7 +79,9 @@ function appendPhotoHitsMurkup(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', createPhotoMarkup(hits));
   let gallery = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
+    
   });
+  gallery.refresh()
 }
 
 function createPhotoMarkup(searchQuery) {

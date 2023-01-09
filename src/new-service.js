@@ -44,9 +44,7 @@ export default class NewsApiService {
   resetPage() {
     this.page = 1;
   }
-  // notMorePage() {
-  //   const lastPage =
-  // }
+
   get query() {
     this.searchQuery;
   }
