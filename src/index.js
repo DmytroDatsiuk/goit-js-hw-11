@@ -60,7 +60,7 @@ function onSearch(e) {
     } catch (error) {
       loadMoreBtn.hide();
       Notiflix.Notify.failure(
-        `Sorry, there are no images matching your search query. Please try again.`
+        `We're sorry, but you've reached the end of search results.`
       );
       console.log(error);
     }
@@ -86,7 +86,7 @@ function onLoadMore(e) {
     } catch (error) {
       loadMoreBtn.hide();
       Notiflix.Notify.failure(
-        `Sorry, there are no images matching your search query. Please try again.`
+        `We're sorry, but you've reached the end of search results.`
       );
       console.log(error);
     }
