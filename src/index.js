@@ -27,7 +27,7 @@ function onSearch(e) {
   newsApiService.query = search.trim();
 
   if (!search.trim()) {
-    loadMoreBtn.hide()
+    loadMoreBtn.hide();
     Notiflix.Notify.failure(`Please enter your reqest.`);
     return;
   }
@@ -59,6 +59,9 @@ function onSearch(e) {
       newsApiService.incrementPage();
     } catch (error) {
       loadMoreBtn.hide();
+      Notiflix.Notify.failure(
+        `Sorry, there are no images matching your search query. Please try again.`
+      );
       console.log(error);
     }
   };
@@ -82,6 +85,9 @@ function onLoadMore(e) {
       smoothScroll();
     } catch (error) {
       loadMoreBtn.hide();
+      Notiflix.Notify.failure(
+        `Sorry, there are no images matching your search query. Please try again.`
+      );
       console.log(error);
     }
   };
