@@ -18,9 +18,7 @@ const newsApiService = new NewsApiService();
 refs.searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
-// onscroll = (event) => {
-//   console.log(event.target.body.scrollHeigh)
-// };
+
 
 function onSearch(e) {
   e.preventDefault();
