@@ -58,12 +58,12 @@ function onSearch(e) {
 
       newsApiService.incrementPage();
     } catch (error) {
+      loadMoreBtn.hide();
       console.log(error);
     }
   };
   getData();
 }
-
 function onLoadMore(e) {
   loadMoreBtn.disable();
 
@@ -81,6 +81,7 @@ function onLoadMore(e) {
 
       smoothScroll();
     } catch (error) {
+      loadMoreBtn.hide();
       console.log(error);
     }
   };
